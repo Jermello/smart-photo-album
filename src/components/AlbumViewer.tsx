@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAlbumStore } from '@/store/albumStore';
 import PageRenderer from './PageRenderer';
 
+
 const AlbumViewer: React.FC = () => {
   const { pages, currentPageIndex, goToNextPage, goToPreviousPage } = useAlbumStore();
   
