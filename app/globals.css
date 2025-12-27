@@ -1,26 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  /* Colors */
+  --color-background: hsl(40 15% 96%);
+  --color-foreground: hsl(30 10% 15%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(30 10% 15%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(30 10% 15%);
+  --color-primary: hsl(25 30% 45%);
+  --color-primary-foreground: hsl(40 20% 98%);
+  --color-secondary: hsl(35 20% 92%);
+  --color-secondary-foreground: hsl(30 10% 25%);
+  --color-muted: hsl(35 15% 90%);
+  --color-muted-foreground: hsl(30 8% 50%);
+  --color-accent: hsl(25 35% 55%);
+  --color-accent-foreground: hsl(40 20% 98%);
+  --color-destructive: hsl(0 72% 51%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-border: hsl(35 15% 88%);
+  --color-input: hsl(35 15% 88%);
+  --color-ring: hsl(25 30% 45%);
+  
+  /* Border radius */
+  --radius: 0.5rem;
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  
+  /* Spacing */
+  --spacing-navbar: 56px;
+  --spacing-sidebar: 260px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Album Editor Design System - CSS Variables for dynamic theming */
+    --background: 40 15% 96%;
+    --foreground: 30 10% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 30 10% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 10% 15%;
+
+    --primary: 25 30% 45%;
+    --primary-foreground: 40 20% 98%;
+
+    --secondary: 35 20% 92%;
+    --secondary-foreground: 30 10% 25%;
+
+    --muted: 35 15% 90%;
+    --muted-foreground: 30 8% 50%;
+
+    --accent: 25 35% 55%;
+    --accent-foreground: 40 20% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 35 15% 88%;
+    --input: 35 15% 88%;
+    --ring: 25 30% 45%;
+
+    --radius: 0.5rem;
+
+    /* Album-specific tokens */
+    --album-page: 0 0% 100%;
+    --album-canvas: 40 12% 94%;
+    --album-shadow: 30 20% 20%;
+    --album-gap: 6px;
+    
+    --navbar-height: 56px;
+    --sidebar-width: 260px;
+
+    /* Sidebar */
+    --sidebar-background: 40 15% 98%;
+    --sidebar-foreground: 30 10% 25%;
+    --sidebar-primary: 25 30% 45%;
+    --sidebar-primary-foreground: 40 20% 98%;
+    --sidebar-accent: 35 20% 94%;
+    --sidebar-accent-foreground: 30 10% 20%;
+    --sidebar-border: 35 15% 90%;
+    --sidebar-ring: 25 30% 45%;
+  }
+
+  .dark {
+    --background: 30 15% 10%;
+    --foreground: 40 15% 95%;
+
+    --card: 30 12% 14%;
+    --card-foreground: 40 15% 95%;
+
+    --popover: 30 12% 14%;
+    --popover-foreground: 40 15% 95%;
+
+    --primary: 35 40% 65%;
+    --primary-foreground: 30 15% 10%;
+
+    --secondary: 30 12% 18%;
+    --secondary-foreground: 40 15% 90%;
+
+    --muted: 30 10% 20%;
+    --muted-foreground: 35 10% 60%;
+
+    --accent: 35 40% 60%;
+    --accent-foreground: 30 15% 10%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 10% 22%;
+    --input: 30 10% 22%;
+    --ring: 35 40% 65%;
+
+    --album-page: 30 8% 18%;
+    --album-canvas: 30 12% 12%;
+    --album-shadow: 0 0% 0%;
+
+    --sidebar-background: 30 12% 12%;
+    --sidebar-foreground: 40 15% 90%;
+    --sidebar-primary: 35 40% 65%;
+    --sidebar-primary-foreground: 30 15% 10%;
+    --sidebar-accent: 30 10% 18%;
+    --sidebar-accent-foreground: 40 15% 95%;
+    --sidebar-border: 30 10% 20%;
+    --sidebar-ring: 35 40% 65%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Album page styling */
+  .album-page {
+    @apply bg-card rounded-sm;
+    box-shadow: 
+      0 1px 3px hsl(var(--album-shadow) / 0.08),
+      0 4px 12px hsl(var(--album-shadow) / 0.06),
+      0 8px 24px hsl(var(--album-shadow) / 0.04);
+  }
+
+  .album-page-thumbnail {
+    @apply bg-card rounded-sm cursor-pointer transition-all duration-200;
+    box-shadow: 
+      0 1px 2px hsl(var(--album-shadow) / 0.06),
+      0 2px 6px hsl(var(--album-shadow) / 0.04);
+  }
+
+  .album-page-thumbnail:hover {
+    box-shadow: 
+      0 2px 4px hsl(var(--album-shadow) / 0.1),
+      0 4px 12px hsl(var(--album-shadow) / 0.08);
+    transform: translateY(-1px);
+  }
+
+  .album-page-thumbnail.selected {
+    @apply ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+
+  /* Photo grid layouts */
+  .photo-grid {
+    @apply w-full h-full p-[var(--album-gap)];
+    display: grid;
+    gap: var(--album-gap);
+  }
+
+  .photo-grid.layout-1 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .photo-grid.layout-2h {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .photo-grid.layout-2v {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .photo-grid.layout-3a {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .photo-grid.layout-3a .photo-item:last-child {
+    grid-column: span 2;
+  }
+
+  .photo-grid.layout-3b {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .photo-grid.layout-3b .photo-item:first-child {
+    grid-row: span 2;
+  }
+
+  .photo-grid.layout-4 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .photo-item {
+    @apply overflow-hidden rounded-[2px];
+  }
+
+  .photo-item img {
+    @apply w-full h-full object-cover;
+  }
+
+  /* Cluster group styling */
+  .cluster-group {
+    @apply rounded-lg p-2 mb-3;
+    background: hsl(var(--sidebar-accent) / 0.5);
+    border: 1px solid hsl(var(--sidebar-border));
+  }
+
+  .cluster-label {
+    @apply text-xs font-medium text-muted-foreground mb-2 px-1;
+  }
+
+  /* Navigation arrows */
+  .nav-arrow {
+    @apply flex items-center justify-center w-10 h-10 rounded-full;
+    @apply bg-card/80 backdrop-blur-sm border border-border/50;
+    @apply text-foreground/70 hover:text-foreground hover:bg-card;
+    @apply transition-all duration-200 cursor-pointer;
+    @apply disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-card/80;
+  }
+
+  .nav-arrow:hover:not(:disabled) {
+    box-shadow: 0 2px 8px hsl(var(--album-shadow) / 0.1);
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 3px;
+  }
+
+  .pt-navbar {
+    padding-top: var(--navbar-height);
+  }
+
+  .h-navbar {
+    height: var(--navbar-height);
+  }
+
+  .w-sidebar {
+    width: var(--sidebar-width);
+  }
+
+  .bg-album-canvas {
+    background-color: hsl(var(--album-canvas));
+  }
+
+  .bg-sidebar {
+    background-color: hsl(var(--sidebar-background));
+  }
+
+  .text-sidebar-foreground {
+    color: hsl(var(--sidebar-foreground));
+  }
+
+  .border-sidebar-border {
+    border-color: hsl(var(--sidebar-border));
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
