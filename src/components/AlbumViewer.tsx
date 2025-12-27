@@ -34,7 +34,11 @@ const AlbumViewer: React.FC = () => {
 
         {/* Album page */}
         <div className="animate-fade-in" key={currentPage.id}>
-          <PageRenderer page={currentPage} variant="full" />
+          <PageRenderer 
+            page={currentPage} 
+            variant="full" 
+            isCoverPage={currentPageIndex === 0}
+          />
         </div>
 
         {/* Right arrow */}

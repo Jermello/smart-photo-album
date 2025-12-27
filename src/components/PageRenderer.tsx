@@ -10,6 +10,7 @@ interface PageRendererProps {
   variant?: 'full' | 'thumbnail';
   isSelected?: boolean;
   onClick?: () => void;
+  isCoverPage?: boolean;
 }
 
 const PageRenderer: React.FC<PageRendererProps> = ({
@@ -17,6 +18,7 @@ const PageRenderer: React.FC<PageRendererProps> = ({
   variant = 'full',
   isSelected = false,
   onClick,
+  isCoverPage = false,
 }) => {
   const isThumbnail = variant === 'thumbnail';
   
@@ -56,6 +58,7 @@ const PageRenderer: React.FC<PageRendererProps> = ({
               width={photo.width}
               height={photo.height}
               loading={isThumbnail ? 'lazy' : 'eager'}
+              priority={isCoverPage && !isThumbnail}
               draggable={false}
               className="w-full h-full object-cover"
               unoptimized
